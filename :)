@@ -1,0 +1,144 @@
+install.packages(c("ggplot2", "ggpubr", "tidyverse", "broom", "AICcmodavg"))
+
+library(tidyverse)
+library(ggplot2)
+library(car)
+library(ggpubr)
+library(tidyverse)
+library(broom)
+library(AICcmodavg)
+
+df <- read.csv('.csv')
+
+
+Describe the distribution
+
+#  check normality 
+hist(mydata$UNIGPA)
+# the best ---> 
+qqnorm(df$BloodSugarLevel, pch = 1, frame = FALSE)
+qqline(df$BloodSugarLevel, col = "black", lwd = 2)
+
+qqPlot(mydata$UNIGPA)
+qqPlot(mydata$HSGPA)
+shapiro.test(mydata$HSGPA)
+
+qqPlot(log(mydata$UNIGPA))
+qqPlot(sqrt(mydata$UNIGPA))
+qqPlot((1/mydata$UNIGPA))
+!!!!!!!!!!!!!!!!!!  check normality!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+#correlation ->>> cor()
+
+
+# Was the UHS hospital’s treatment successful in reducing cholesterol levels?
+
+ggplot(df1, aes(x = as.factor(GroupIndicator), y = cholesterol_levels,
+fill = as.factor(GroupIndicator))) +
+geom_boxplot() +
+theme_minimal()
+
+
+#Fit the linear models
+model1 <- lm(cholesterol_levels ~ BMI, data = data)
+model2 <- lm(cholesterol_levels ~ GroupIndicator + BMI + Age + PhysicalActivity, data = data)
+model3 <- lm(cholesterol_levels ~ GroupIndicator + Age + PhysicalActivity, data = data)
+
+summary(model1)
+
+
+# Create the box plot
+ggplot(data, aes(x = Governorate, y = Property.value)) +
+geom_boxplot() +
+labs(title = "Relationship between Governorates and Property Price",
+x = "Governorate",
+y = "Property Price") +
+theme_minimal()
+
+bar_plot <- ggplot(data, aes(x = Governorate)) +
+geom_bar() +
+labs(title = "Bar Plot of Property Count by Governorate",
+x = "Governorate",
+y = "Count") +
+theme_minimal()
+
+
+
+scatter_plot <- ggplot(data, aes(x = Governorate, y = Property.value)) +
+geom_point() +
+labs(title = "Scatter Plot of Property Price by Governorate",
+x = "Governorate",
+y = "Property Price") +
+theme_minimal()
+
+# Histogram
+histogram <- ggplot(data, aes(x = Property.value)) +
+geom_histogram(binwidth = 100000) +
+labs(title = "Histogram of Property Prices",
+x = "Property Price",
+y = "Frequency") +
+theme_minimal()
+
+
+# Create a mosaic plot
+mosaic_plot <- ggplot(data, aes(x = Governorate, fill = cut_width(Property.value, width = 100000))) +
+geom_mosaic() +
+labs(title = "Mosaic Plot of Property Price by Governorate",
+x = "Governorate",
+fill = "Property Price Range") +
+theme_minimal()
+
+
+
+install.packages('ggplot2')
+library(ggplot2)
+q2_data <- read.csv("QQ2.csv")
+view(q2_data)
+#Governorate vs. Property Price:
+ggplot(q2_data, aes(x=Governorate, y=Prop.Value)) +
+geom_boxplot() +
+theme_minimal() +
+labs(title="Property Prices by Governorate", x="Governorate", y="Property Value (JD)")
+
+# Area in m^2 vs. Property Value:
+
+ggplot(q2_data, aes(x=Area.in.m2, y=Prop.Value)) +
+geom_point(alpha=0.5) +
+geom_smooth(method="lm", se=FALSE, color="blue") +
+theme_minimal() +
+labs(title="Property Value vs. Area", x="Area (m^2)", y="Property Value (JD)")
+
+
+#Correlation between Area and Bedrooms:
+
+cor(q2_data$Area.in.m2, q2_data$Bed.Rooms)
+
+qqnorm(q2_data$Area.in.m2, pch = 1)
+qqline(q2_data$Area.in.m2, col = "red", lwd = 2)
+
+qqnorm(q2_data$Bed.Rooms, pch = 1, frame = FALSE)
+qqline(q2_data$Bed.Rooms, col = "red", lwd = 2)
+
+
+q2_data$areatrans=log(q2_data$Area.in.m2)
+q2_data$bedtrans=log(q2_data$Bed.Rooms)
+qqnorm(q2_data$areatrans, pch = 1)
+qqline(q2_data$areatrans, col = "red", lwd = 2)
+
+qqnorm(q2_data$bedtrans, pch = 1)
+qqline(q2_data$bedtrans, col = "red", lwd = 2)
+
+cor(q2_data$areatrans, q2_data$bedtrans)
+
+# Governorate-Location vs. Property Value:
+
+
+ggplot(q2_data, aes(x =q2_data$Governorate, y = q2_data$Prop.Value,col=q2_data$Location)) +
+geom_boxplot() +
+labs(title = "Relationship between Governorates and Property Price",
+x = "Governorate",
+y = "Property Price") +
+theme_minimal()
+###############################
+
+
+
