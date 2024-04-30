@@ -1,0 +1,30 @@
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+
+# Read the dataset
+data <- read.csv("path/to/your/q3.csv")
+
+# Filter data for Jordan and Palestine with Median estimates
+filtered_data <- data %>% 
+  filter(CountryName %in% c("Jordan", "Palestine"), `Uncertainty bounds*` == "Median")
+
+# Reshape the data for plotting
+data_long <- pivot_longer(filtered_data, cols = `2010`:`2015`, names_to = "Year", values_to = "MortalityRate")
+
+# Plot 1: Mortality Rates for Jordan and Palestine
+ggplot(data_long, aes(x = Year, y = MortalityRate, color = CountryName)) +
+  geom_line() +
+  labs(title = "Under-Five Mortality Rates for Jordan and Palestine (2010-2015)",
+       x = "Year",
+       y = "Under-Five Mortality Rate (per 1000 live births)") +
+  theme_minimal()
+
+# Plot 2: Adjusted Y-Axis Range
+ggplot(data_long, aes(x = Year, y = MortalityRate, color = CountryName)) +
+  geom_line() +
+  labs(title = "Under-Five Mortality Rates for Jordan and Palestine (2010-2015) [Y-Axis: 10 to 30]",
+       x = "Year",
+       y = "Under-Five Mortality Rate (per 1000 live births)") +
+  ylim(10, 30) +
+  theme_minimal()
