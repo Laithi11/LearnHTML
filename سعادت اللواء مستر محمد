@@ -1,0 +1,10 @@
+T-Tests: Use when comparing means between two groups or when comparing a sample mean to a population mean.
+
+Q-Q Plots: Use to check the distribution of your data, especially for assessing normality assumptions. AND 
+Use Q-Q plots to assess if your data follows a specific distribution (e.g., normal distribution). If your data points fall close to the diagonal line in the Q-Q plot, it suggests that your data follows the specified distribution. Q-Q plots are often used to check the assumption of normality in statistical analyses.
+
+ANOVA: Use when comparing means across multiple groups (more than two) or when analyzing the effects of multiple categorical variables.
+
+
+using Spearman's correlation when one var is normal distributed and the other one is positive skewed / negative skewed 
+only use Pearson Correlation when both are normal distributed
